@@ -122,6 +122,9 @@ function! PRun(...)
 	endif
 endfunction
 
+" formatting xml
+command! XMLFormat % !xmllint --format -
+
 " external command used to run python scripts
 " let g:prun_cmd = 'python'
 " or use this for running under Zope
