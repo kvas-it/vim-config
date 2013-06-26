@@ -105,8 +105,9 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 map <leader>b :VCSBlame<CR>
-map <leader>d :Ex<CR>
-map <leader>g :GundoToggle<CR>
+map <leader>d :VCSDiff<CR>
+map <leader>\ :Ex<CR>
+map <leader>u :GundoToggle<CR>
 
 " command and function to run python scripts
 command! -complete=file -nargs=? PRun call PRun(<q-args>)
@@ -145,8 +146,15 @@ map <leader>p :cprev<CR>
 let g:ctrlp_cmd = 'CtrlPMixed'
 map <leader>e :CtrlP 
 
-" Ack
-map <leader>a :Ack 
+" Number addition and subtraction (because <C-a> is used by screen)
+map <leader>a <C-a> 
+" Since we defined \a for addition, \x for subtraction would be consistent
+map <leader>x <C-x> 
+
+" Ack (called with \g for _grep_)
+map <leader>g :Ack 
+" And real grep
+map <leader>G :grep -r 
 
 " Ctags
 :set tags=~/.mytags
