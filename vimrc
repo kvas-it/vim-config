@@ -13,9 +13,6 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set hidden		" allow hidden unsaved buffers
 
-" activate pathogen
-call pathogen#infect()
-
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
@@ -138,7 +135,7 @@ map <leader>R :wa<CR>:PRun %:p<CR>
 map <leader>r :wa<CR>:PRun<CR>
 
 " Code checking with flake8 and Khuno
-let g:flake8_map='<leader>f'
+map <leader>f :call Flake8()<CR>
 map <leader>F :Khuno show<CR>
 
 " Highlighting of errors (Khuno)
@@ -165,4 +162,7 @@ map <leader>G :grep -r
 
 " Ctags
 :set tags=~/.mytags
+
+" activate pathogen
+call pathogen#infect()
 
