@@ -78,6 +78,7 @@ au FileType javascript setlocal sw=4 sts=4 et
 
 " type :make and get a list of syntax errors
 au FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
+au FileType python setlocal equalprg=reindent.py
 " au FileType python setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au FileType python setlocal efm=\(\'%m\'\,\ \(\'%f\'\,\ %l\,\ %c\,\ \'%s\'\)\)
 
@@ -136,7 +137,13 @@ map <leader>R :wa<CR>:PRun %:p<CR>
 " run last file
 map <leader>r :wa<CR>:PRun<CR>
 
+" Code checking with flake8 and Khuno
 let g:flake8_map='<leader>f'
+map <leader>F :Khuno show<CR>
+
+" Highlighting of errors (Khuno)
+hi clear SpellBad
+hi SpellBad cterm=underline
 
 " map '\n'/'\p' to :cnext/:cprev
 map <leader>n :cnext<CR>

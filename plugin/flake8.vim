@@ -11,7 +11,7 @@ function! <SID>Flake8()
   set grepformat&vim
   set grepformat&vim
   let &grepformat = '%f:%l:%m'
-  let &grepprg = 'flake8 --ignore=E128,E127,E126'
+  let &grepprg = 'flake8'
   if &readonly == 0 | update | endif
   silent! grep! %
   let &grepformat = l:grepformat_save

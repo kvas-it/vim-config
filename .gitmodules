@@ -1,0 +1,3 @@
+[submodule "bundle/khuno.vim"]
+	path = bundle/khuno.vim
+	url = https://github.com/alfredodeza/khuno.vim.git
