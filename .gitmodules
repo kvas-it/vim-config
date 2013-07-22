@@ -16,3 +16,6 @@
 [submodule "bundle/vcscommand.vim"]
 	path = bundle/vcscommand.vim
 	url = https://github.com/vim-scripts/vcscommand.vim.git
+[submodule "bundle/vim-commentary"]
+	path = bundle/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
