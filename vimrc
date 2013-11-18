@@ -71,6 +71,7 @@ let g:netrw_list_hide='\.pyc$,\..*\.swp$'
 
 " 4-space indents for python and javascript
 au FileType python setlocal sw=4 sts=4 et
+au FileType ruby setlocal sw=4 sts=4 et
 au FileType javascript setlocal sw=4 sts=4 et
 
 " type :make and get a list of syntax errors
