@@ -67,7 +67,7 @@ endif
 
 " exclude the files that we never edit
 set wildignore+=*.pyc
-let g:netrw_list_hide='\.pyc$,\..*\.swp$'
+let g:netrw_list_hide='\.pyc$,\..*\.swp$,^\.hg'
 
 " 4-space indents for python and javascript
 au FileType python setlocal sw=4 sts=4 et
