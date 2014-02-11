@@ -71,6 +71,7 @@ let g:netrw_list_hide='\.pyc$,\..*\.swp$,^\.hg'
 
 " 4-space indents for python and javascript
 au FileType python setlocal sw=4 sts=4 et
+au FileType haskell setlocal sw=4 sts=4 et
 au FileType ruby setlocal sw=4 sts=4 et
 au FileType javascript setlocal sw=4 sts=4 et
 
@@ -80,9 +81,10 @@ au FileType python setlocal equalprg=reindent.py
 " au FileType python setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au FileType python setlocal efm=\(\'%m\'\,\ \(\'%f\'\,\ %l\,\ %c\,\ \'%s\'\)\)
 
-" 2-space indents for html and xml
+" 2-space indents for html, xml and rst
 au FileType html setlocal sw=2 sts=2 et
 au FileType xml setlocal sw=2 sts=2 et
+au FileType rst setlocal sw=2 sts=2 et
 
 " zpt is html too
 au BufRead,BufNewFile *.zpt setfiletype html
@@ -162,7 +164,7 @@ map <leader>g :Ack
 map <leader>G :grep -r 
 
 " Ctags
-:set tags=~/.mytags
+:set tags=~/.mytags/.all
 
 " activate pathogen
 call pathogen#infect()
