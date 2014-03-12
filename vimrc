@@ -25,6 +25,10 @@ if has('mouse')
   set mouse=a
 endif
 
+if has('mouse_sgr')
+  set ttymouse=sgr
+endif
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -169,3 +173,8 @@ map <leader>G :grep -r
 " activate pathogen
 call pathogen#infect()
 
+" MacVim-specific stuff
+if has("gui_macvim")
+	set gfn=Ubuntu\ Mono:h13
+	colorscheme kvas
+endif
