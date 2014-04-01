@@ -85,10 +85,11 @@ au FileType python setlocal equalprg=reindent.py
 " au FileType python setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au FileType python setlocal efm=\(\'%m\'\,\ \(\'%f\'\,\ %l\,\ %c\,\ \'%s\'\)\)
 
-" 2-space indents for html, xml and rst
+" 2-space indents for html, xml, rst and yaml
 au FileType html setlocal sw=2 sts=2 et
 au FileType xml setlocal sw=2 sts=2 et
 au FileType rst setlocal sw=2 sts=2 et
+au FileType yaml setlocal sw=2 sts=2 et
 
 " zpt is html too
 au BufRead,BufNewFile *.zpt setfiletype html
