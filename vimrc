@@ -79,6 +79,10 @@ au FileType haskell setlocal sw=4 sts=4 et
 au FileType ruby setlocal sw=4 sts=4 et
 au FileType javascript setlocal sw=4 sts=4 et
 
+" commands for configuring indenting
+command TW4 setlocal sw=4 sts=4 et
+command TW2 setlocal sw=2 sts=2 et
+
 " type :make and get a list of syntax errors
 au FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 au FileType python setlocal equalprg=reindent.py
