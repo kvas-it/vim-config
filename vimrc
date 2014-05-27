@@ -78,6 +78,7 @@ au FileType python setlocal sw=4 sts=4 et
 au FileType haskell setlocal sw=4 sts=4 et
 au FileType ruby setlocal sw=4 sts=4 et
 au FileType javascript setlocal sw=4 sts=4 et
+au FileType coffee setlocal sw=2 sts=2 et
 
 " commands for configuring indenting
 command TW4 setlocal sw=4 sts=4 et
@@ -118,7 +119,6 @@ map <leader>b :VCSBlame<CR>
 map <leader>d :VCSDiff<CR>
 map <leader>\ :Ex<CR>
 map <leader>u :GundoToggle<CR>
-map <leader>t :NERDTreeToggle<CR>
 
 " command and function to run python scripts
 command! -complete=file -nargs=? PRun call PRun(<q-args>)
