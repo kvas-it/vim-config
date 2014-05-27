@@ -118,6 +118,7 @@ map <leader>b :VCSBlame<CR>
 map <leader>d :VCSDiff<CR>
 map <leader>\ :Ex<CR>
 map <leader>u :GundoToggle<CR>
+map <leader>t :NERDTreeToggle<CR>
 
 " command and function to run python scripts
 command! -complete=file -nargs=? PRun call PRun(<q-args>)
