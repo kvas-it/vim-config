@@ -81,8 +81,8 @@ au FileType javascript setlocal sw=4 sts=4 et
 au FileType coffee setlocal sw=2 sts=2 et
 
 " commands for configuring indenting
-command TW4 setlocal sw=4 sts=4 et
-command TW2 setlocal sw=2 sts=2 et
+command! TW4 setlocal sw=4 sts=4 et
+command! TW2 setlocal sw=2 sts=2 et
 
 " type :make and get a list of syntax errors
 au FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
@@ -147,17 +147,25 @@ map <leader>R :wa<CR>:PRun %:p<CR>
 " run last file
 map <leader>r :wa<CR>:PRun<CR>
 
-" Code checking with flake8 and Khuno
-map <leader>f :call Flake8()<CR>
-map <leader>F :Khuno show<CR>
+" Code checking with Syntastic
+function! SyntasticShowErr()
+	execute ':Errors'
+	command! SyntasticToggleErr call SyntasticHideErr()
+endfunction
+function! SyntasticHideErr()
+	execute ':SyntasticReset'
+	execute ':SyntasticCheck'
+	command! SyntasticToggleErr call SyntasticShowErr()
+endfunction
+command! SyntasticToggleErr call SyntasticShowErr()
 
-" Highlighting of errors (Khuno)
-hi clear SpellBad
-hi SpellBad cterm=underline
+let g:syntastic_always_populate_loc_list = 1
+map <leader>f :SyntasticToggleErr<CR>
+map <leader>F :SyntasticToggleMode<CR>
 
-" map '\n'/'\p' to :cnext/:cprev
-map <leader>n :cnext<CR>
-map <leader>p :cprev<CR>
+" map '\n'/'\p' to :lnext/:lprev
+map <leader>n :lnext<CR>
+map <leader>p :lprev<CR>
 
 " ctrl+p config
 let g:ctrlp_cmd = 'CtrlPMixed'
