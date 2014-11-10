@@ -36,8 +36,8 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-" activate pathogen
-" call pathogen#infect()
+" This is needed before Vundle init.
+filetype off
 
 " Initialize Vundle
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -45,8 +45,8 @@ call vundle#begin()
 
 " Vundle managed plugins:
 Plugin 'gmarik/Vundle.vim'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'kien/ctrlp.vim'
+Plugin 'derekwyatt/vim-scala'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'groenewege/vim-less'
