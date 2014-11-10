@@ -148,6 +148,7 @@ map <leader>R :wa<CR>:PRun %:p<CR>
 map <leader>r :wa<CR>:PRun<CR>
 
 " Code checking with Syntastic
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 function! SyntasticShowErr()
 	execute ':Errors'
 	command! SyntasticToggleErr call SyntasticHideErr()
@@ -170,6 +171,7 @@ map <leader>p :lprev<CR>
 " ctrl+p config
 let g:ctrlp_cmd = 'CtrlPMixed'
 map <leader>e :CtrlP 
+set wildignore+=node_modules/*
 
 " Number addition and subtraction (because <C-a> is used by screen)
 map <leader>a <C-a> 
