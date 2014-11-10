@@ -36,6 +36,9 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" activate pathogen
+call pathogen#infect()
+
 " Initialize Vundle
 call vundle#begin()
 
@@ -44,7 +47,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " Finalize Vundle init
 call vundle#end()
-filetype plugin indent on
 
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -195,9 +197,6 @@ map <leader>G :grep -r
 
 " Ctags
 :set tags=~/.mytags/.all
-
-" activate pathogen
-call pathogen#infect()
 
 " MacVim-specific stuff
 if has("gui_macvim")
