@@ -171,7 +171,7 @@ map <leader>p :lprev<CR>
 " ctrl+p config
 let g:ctrlp_cmd = 'CtrlPMixed'
 map <leader>e :CtrlP 
-set wildignore+=node_modules/*
+set wildignore+=*/node_modules/*
 
 " Number addition and subtraction (because <C-a> is used by screen)
 map <leader>a <C-a> 
