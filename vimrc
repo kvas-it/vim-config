@@ -37,14 +37,16 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " activate pathogen
-call pathogen#infect()
+" call pathogen#infect()
 
 " Initialize Vundle
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " Vundle managed plugins:
 Plugin 'gmarik/Vundle.vim'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'kien/ctrlp.vim'
 
 " Finalize Vundle init
 call vundle#end()
