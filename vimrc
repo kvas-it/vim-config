@@ -44,6 +44,7 @@ call vundle#begin()
 
 " Vundle managed plugins:
 Plugin 'gmarik/Vundle.vim'
+Plugin 'derekwyatt/vim-scala'
 
 " Finalize Vundle init
 call vundle#end()
