@@ -47,6 +47,13 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'groenewege/vim-less'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-commentary'
 
 " Finalize Vundle init
 call vundle#end()

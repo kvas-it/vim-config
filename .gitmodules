@@ -1,33 +1,6 @@
-[submodule "bundle/ack.vim"]
-	path = bundle/ack.vim
-	url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/gundo.vim"]
-	path = bundle/gundo.vim
-	url = https://github.com/sjl/gundo.vim.git
 [submodule "bundle/vcscommand.vim"]
 	path = bundle/vcscommand.vim
 	url = https://github.com/vim-scripts/vcscommand.vim.git
-[submodule "bundle/vim-commentary"]
-	path = bundle/vim-commentary
-	url = https://github.com/tpope/vim-commentary.git
-[submodule "bundle/prolog.vim"]
-	path = bundle/prolog.vim
-	url = https://github.com/adimit/prolog.vim.git
-[submodule "bundle/vim-io"]
-	path = bundle/vim-io
-	url = https://github.com/xhr/vim-io.git
-[submodule "bundle/vim-less"]
-	path = bundle/vim-less
-	url = https://github.com/groenewege/vim-less.git
-[submodule "bundle/vim-coffee-script"]
-	path = bundle/vim-coffee-script
-	url = https://github.com/kchmck/vim-coffee-script.git
-[submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/editorconfig-vim"]
-	path = bundle/editorconfig-vim
-	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "bundle/Vundle.vim"]
 	path = bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim
