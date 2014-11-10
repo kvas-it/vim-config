@@ -36,6 +36,16 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" Initialize Vundle
+call vundle#begin()
+
+" Vundle managed plugins:
+Plugin 'gmarik/Vundle.vim'
+
+" Finalize Vundle init
+call vundle#end()
+filetype plugin indent on
+
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
 " 'cindent' is on in C files, etc.
