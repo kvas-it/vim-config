@@ -206,13 +206,8 @@ map <leader>a <C-a>
 " Since we defined \a for addition, \x for subtraction would be consistent
 map <leader>x <C-x> 
 
-" Ack (called with \g for _grep_)
-map <leader>g :Ack 
-" And real grep
-map <leader>G :grep -r 
-
-" Ctags
-:set tags=~/.mytags/.all
+" Grep binding (\g)
+map <leader>g :grep -r 
 
 " MacVim-specific stuff
 if has("gui_macvim")
