@@ -54,6 +54,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-commentary'
+Plugin 'vim-scripts/vcscommand.vim'
+Plugin 'dag/vim2hs'
 
 " Finalize Vundle init
 call vundle#end()
@@ -94,6 +96,9 @@ endif
 " exclude the files that we never edit
 set wildignore+=*.pyc
 let g:netrw_list_hide='\.pyc$,\..*\.swp$,^\.hg'
+
+" 2-space indents for C++ (according to Google style guide)
+au FileType cpp setlocal sw=2 sts=2 et
 
 " 4-space indents for python and javascript
 au FileType python setlocal sw=4 sts=4 et
@@ -156,13 +161,12 @@ function! PRun(...)
 	endif
 endfunction
 
-" formatting xml
+" Formatting xml
 command! XMLFormat % !xmllint --format -
 
-" external command used to run python scripts
-" let g:prun_cmd = 'python'
-" or use this for running under Zope
-let g:prun_cmd = 'zrun'
+" External command used to run scripts (runtest delegates to an appropriate
+" test runner).
+let g:prun_cmd = 'runtest'
 
 " run current file in zope environment
 map <leader>R :wa<CR>:PRun %:p<CR>
@@ -170,7 +174,9 @@ map <leader>R :wa<CR>:PRun %:p<CR>
 map <leader>r :wa<CR>:PRun<CR>
 
 " Code checking with Syntastic
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_python_checkers = ['pyflakes']
 function! SyntasticShowErr()
 	execute ':Errors'
 	command! SyntasticToggleErr call SyntasticHideErr()
@@ -186,14 +192,14 @@ let g:syntastic_always_populate_loc_list = 1
 map <leader>f :SyntasticToggleErr<CR>
 map <leader>F :SyntasticToggleMode<CR>
 
-" map '\n'/'\p' to :lnext/:lprev
-map <leader>n :lnext<CR>
-map <leader>p :lprev<CR>
+" map '\n'/'\p' to :cnext/:cprev
+map <leader>n :cnext<CR>
+map <leader>p :cprev<CR>
 
 " ctrl+p config
 let g:ctrlp_cmd = 'CtrlPMixed'
 map <leader>e :CtrlP 
-set wildignore+=*/node_modules/*
+set wildignore+=doc/*,node_modules/*,*.html
 
 " Number addition and subtraction (because <C-a> is used by screen)
 map <leader>a <C-a> 
