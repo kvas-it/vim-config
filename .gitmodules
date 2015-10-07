@@ -1,6 +1,3 @@
-[submodule "bundle/vcscommand.vim"]
-	path = bundle/vcscommand.vim
-	url = https://github.com/vim-scripts/vcscommand.vim.git
 [submodule "bundle/Vundle.vim"]
 	path = bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim
