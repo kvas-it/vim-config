@@ -191,6 +191,8 @@ command! SyntasticToggleErr call SyntasticShowErr()
 let g:syntastic_always_populate_loc_list = 1
 map <leader>f :SyntasticToggleErr<CR>
 map <leader>F :SyntasticToggleMode<CR>
+map <leader>N :lnext<CR>
+map <leader>P :lprev<CR>
 
 " map '\n'/'\p' to :cnext/:cprev
 map <leader>n :cnext<CR>
