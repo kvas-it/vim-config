@@ -148,30 +148,30 @@ map <leader>\ :Ex<CR>
 map <leader>u :GundoToggle<CR>
 
 " command and function to run python scripts
-command! -complete=file -nargs=? PRun call PRun(<q-args>)
-function! PRun(...)
+command! -complete=file -nargs=? Run call Run(<q-args>)
+function! Run(...)
 	if a:0 > 0 && a:1 != ''
-		let g:prun_target=a:1
+		let g:run_target=a:1
 	endif
-	if exists('g:prun_target')
+	if exists('g:run_target')
 		wa
-		execute ':!' . g:prun_cmd . ' ' . g:prun_target
+		execute ':!' . g:run_cmd . ' ' . g:run_target
 	else
-		PRun %:p
+		Run %:p
 	endif
 endfunction
 
 " Formatting xml
 command! XMLFormat % !xmllint --format -
 
-" External command used to run scripts (runtest delegates to an appropriate
-" test runner).
-let g:prun_cmd = 'runtest'
+" External command used to run files (vimrun delegates to an appropriate
+" test runner, etc.).
+let g:run_cmd = 'vimrun'
 
-" run current file in zope environment
-map <leader>R :wa<CR>:PRun %:p<CR>
+" run current file
+map <leader>R :wa<CR>:Run %:p<CR>
 " run last file
-map <leader>r :wa<CR>:PRun<CR>
+map <leader>r :wa<CR>:Run<CR>
 
 " Code checking with Syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
