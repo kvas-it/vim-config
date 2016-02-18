@@ -210,9 +210,3 @@ map <leader>x <C-x>
 
 " Grep binding (\g)
 map <leader>g :grep -r 
-
-" MacVim-specific stuff
-if has("gui_macvim")
-	set gfn=Ubuntu\ Mono:h13
-	colorscheme kvas
-endif
