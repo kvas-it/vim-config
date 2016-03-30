@@ -53,6 +53,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
+Plugin 'scrooloose/nerdtree'
 
 " Finalize Vundle init
 call vundle#end()
@@ -161,8 +162,11 @@ map <c-h> <c-w>h
 
 map <leader>b :VCSBlame<CR>
 map <leader>d :VCSDiff<CR>
-map <leader>\ :Ex<CR>
+map <leader>\ :e %:h<CR>
 map <leader>u :GundoToggle<CR>
+
+let g:NERDTreeHijackNetrw = 1
+let g:NERDTreeIgnore=['\.pyc$']
 
 " command and function to run python scripts
 command! -complete=file -nargs=? Run call Run(<q-args>)
