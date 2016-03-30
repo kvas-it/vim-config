@@ -29,13 +29,6 @@ if has('mouse_sgr')
   set ttymouse=sgr
 endif
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
 " This is needed before Vundle init.
 filetype off
 
@@ -56,9 +49,33 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-commentary'
 Plugin 'vim-scripts/vcscommand.vim'
 Plugin 'dag/vim2hs'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'mhinz/vim-signify'
 
 " Finalize Vundle init
 call vundle#end()
+
+" Airline configuration
+let g:airline_powerline_fonts = 1
+set laststatus=2
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  set t_Co=256
+  syntax on
+  set hlsearch
+endif
+
+if has("gui_running")
+  set guifont=Source\ Code\ Pro\ Light:h12
+  set go-=l
+  set go-=r
+  set go-=L
+  set go-=R
+endif
 
 " Enable file type detection.
 " Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -70,8 +87,8 @@ filetype plugin indent on
 augroup vimrcEx
 au!
 
-" For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
+" For all text files set 'textwidth' to 72 characters.
+autocmd FileType text setlocal textwidth=72
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -90,7 +107,7 @@ augroup END
 " Only define it when not defined already.
 if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-		  \ | wincmd p | diffthis
+    \ | wincmd p | diffthis
 endif
 
 " exclude the files that we never edit
@@ -150,15 +167,15 @@ map <leader>u :GundoToggle<CR>
 " command and function to run python scripts
 command! -complete=file -nargs=? Run call Run(<q-args>)
 function! Run(...)
-	if a:0 > 0 && a:1 != ''
-		let g:run_target=a:1
-	endif
-	if exists('g:run_target')
-		wa
-		execute ':!' . g:run_cmd . ' ' . g:run_target
-	else
-		Run %:p
-	endif
+  if a:0 > 0 && a:1 != ''
+    let g:run_target=a:1
+  endif
+  if exists('g:run_target')
+    wa
+    execute ':!' . g:run_cmd . ' ' . g:run_target
+  else
+    Run %:p
+  endif
 endfunction
 
 " Formatting xml
@@ -176,15 +193,15 @@ map <leader>r :wa<CR>:Run<CR>
 " Code checking with Syntastic
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-let g:syntastic_python_checkers = ['pyflakes']
+let g:syntastic_python_checkers = ['flake8']
 function! SyntasticShowErr()
-	execute ':Errors'
-	command! SyntasticToggleErr call SyntasticHideErr()
+  execute ':Errors'
+  command! SyntasticToggleErr call SyntasticHideErr()
 endfunction
 function! SyntasticHideErr()
-	execute ':SyntasticReset'
-	execute ':SyntasticCheck'
-	command! SyntasticToggleErr call SyntasticShowErr()
+  execute ':SyntasticReset'
+  execute ':SyntasticCheck'
+  command! SyntasticToggleErr call SyntasticShowErr()
 endfunction
 command! SyntasticToggleErr call SyntasticShowErr()
 
@@ -200,13 +217,16 @@ map <leader>p :cprev<CR>
 
 " ctrl+p config
 let g:ctrlp_cmd = 'CtrlPMixed'
-map <leader>e :CtrlP 
+map <leader>e :CtrlP
 set wildignore+=doc/*,node_modules/*,*.html
 
 " Number addition and subtraction (because <C-a> is used by screen)
-map <leader>a <C-a> 
+map <leader>a <C-a>
 " Since we defined \a for addition, \x for subtraction would be consistent
-map <leader>x <C-x> 
+map <leader>x <C-x>
+
+" Signify toggle
+map <leader>s :SignifyToggle<CR>
 
 " Grep binding (\g)
-map <leader>g :grep -r 
+map <leader>g :grep -r
