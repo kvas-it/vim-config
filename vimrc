@@ -68,6 +68,7 @@ if &t_Co > 2 || has("gui_running")
   set t_Co=256
   syntax on
   set hlsearch
+  colorscheme jellybeans
 endif
 
 if has("gui_running")
