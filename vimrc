@@ -1,4 +1,3 @@
-
 " Use Vim settings, rather then Vi settings (much better!).
 set nocompatible
 
@@ -39,13 +38,11 @@ call vundle#begin()
 " Vundle managed plugins:
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'derekwyatt/vim-scala'
 Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'groenewege/vim-less'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'tpope/vim-commentary'
 Plugin 'vim-scripts/vcscommand.vim'
 Plugin 'dag/vim2hs'
@@ -54,7 +51,6 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdtree'
-Plugin 'dleonard0/pony-vim-syntax'
 
 " Finalize Vundle init
 call vundle#end()
