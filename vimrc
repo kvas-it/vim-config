@@ -54,6 +54,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdtree'
+Plugin 'dleonard0/pony-vim-syntax'
 
 " Finalize Vundle init
 call vundle#end()
@@ -132,7 +133,7 @@ command! TW2 setlocal sw=2 sts=2 et
 
 " type :make and get a list of syntax errors
 au FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-au FileType python setlocal equalprg=reindent.py
+au FileType python setlocal equalprg=reindent
 " au FileType python setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 au FileType python setlocal efm=\(\'%m\'\,\ \(\'%f\'\,\ %l\,\ %c\,\ \'%s\'\)\)
 
@@ -154,12 +155,6 @@ set foldlevel=1
 
 " use OS clipboard
 set clipboard=unnamed
-
-" map ctrl+hjkl to move between windows
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
 
 map <leader>b :VCSBlame<CR>
 map <leader>d :VCSDiff<CR>
@@ -232,6 +227,8 @@ map <leader>x <C-x>
 
 " Signify toggle
 map <leader>s :SignifyToggle<CR>
+" Signify refresh
+map <leader>S :SignifyRefresh<CR>
 
 " Grep binding (\g)
 map <leader>g :grep -r
