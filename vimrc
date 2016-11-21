@@ -51,6 +51,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdtree'
+Plugin 'mitsuhiko/vim-jinja'
 
 " Finalize Vundle init
 call vundle#end()
@@ -69,7 +70,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 if has("gui_running")
-  set guifont=Source\ Code\ Pro\ Light:h12
+  set guifont=Source\ Code\ Pro\ Medium:h11
   set go-=l
   set go-=r
   set go-=L
@@ -126,6 +127,8 @@ au FileType coffee setlocal sw=2 sts=2 et
 " commands for configuring indenting
 command! TW4 setlocal sw=4 sts=4 et
 command! TW2 setlocal sw=2 sts=2 et
+command! TT8 setlocal sw=8 sts=8 noet
+command! TT4 setlocal sw=4 sts=4 noet
 
 " type :make and get a list of syntax errors
 au FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
@@ -190,6 +193,19 @@ map <leader>r :wa<CR>:Run<CR>
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 let g:syntastic_python_checkers = ['flake8']
+
+function! MypyToggle()
+  if g:syntastic_python_checkers == ['flake8']
+    let g:syntastic_python_checkers = ['flake8', 'mypy']
+    echo "Enabled mypy"
+  else
+    let g:syntastic_python_checkers = ['flake8']
+    echo "Disabled mypy"
+  endif
+endfunction
+command! MypyToggle call MypyToggle()
+map <leader>m :MypyToggle<CR>
+
 function! SyntasticShowErr()
   execute ':Errors'
   command! SyntasticToggleErr call SyntasticHideErr()
