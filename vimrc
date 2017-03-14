@@ -53,6 +53,11 @@ Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mitsuhiko/vim-jinja'
 
+" Additional plugins for vim orgmode:
+Plugin 'jceb/vim-orgmode'
+Plugin 'tpope/vim-speeddating'
+Plugin 'vim-scripts/utl.vim'
+
 " Finalize Vundle init
 call vundle#end()
 
@@ -244,3 +249,10 @@ map <leader>S :SignifyRefresh<CR>
 
 " Grep binding (\g)
 map <leader>g :grep -r
+
+" Universal linking config and key binding
+let g:utl_cfg_hdl_scm_http = "silent !open '%u'"
+map <leader>l :Utl<CR>
+
+" OrgMode config
+let g:org_todo_keywords=['PENDING', 'TODO', 'DONE']
