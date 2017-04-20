@@ -10,6 +10,7 @@ set ruler		" show the cursor position all the time
 set number		" number lines
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
+set ignorecase          " ignore case when searching
 set hidden		" allow hidden unsaved buffers
 
 " Don't use Ex mode, use Q for formatting
@@ -38,7 +39,6 @@ call vundle#begin()
 " Vundle managed plugins:
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'groenewege/vim-less'
 Plugin 'editorconfig/editorconfig-vim'
@@ -52,6 +52,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mitsuhiko/vim-jinja'
+Plugin 'dag/vim-fish'
+Plugin 'w0rp/ale'
 
 " Additional plugins for vim orgmode:
 Plugin 'jceb/vim-orgmode'
@@ -152,6 +154,14 @@ au BufRead,BufNewFile *.zpt setfiletype html
 " pys is python too
 au BufRead,BufNewFile *.pys setfiletype python
 
+" ALE configuration
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '?'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_set_loclist = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'normal'
+
 " folding
 set foldmethod=indent
 set nofoldenable
@@ -176,7 +186,11 @@ function! Run(...)
   endif
   if exists('g:run_target')
     wa
-    execute ':!' . g:run_cmd . ' ' . g:run_target
+    if has('nvim')
+      execute 'sp term://' . g:run_cmd . ' ' . g:run_target
+    else
+      execute ':!' . g:run_cmd . ' ' . g:run_target
+    endif
   else
     Run %:p
   endif
@@ -194,43 +208,15 @@ map <leader>R :wa<CR>:Run %:p<CR>
 " run last file
 map <leader>r :wa<CR>:Run<CR>
 
-" Code checking with Syntastic
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
-let g:syntastic_python_checkers = ['flake8']
-
-function! MypyToggle()
-  if g:syntastic_python_checkers == ['flake8']
-    let g:syntastic_python_checkers = ['flake8', 'mypy']
-    echo "Enabled mypy"
-  else
-    let g:syntastic_python_checkers = ['flake8']
-    echo "Disabled mypy"
-  endif
-endfunction
-command! MypyToggle call MypyToggle()
-map <leader>m :MypyToggle<CR>
-
-function! SyntasticShowErr()
-  execute ':Errors'
-  command! SyntasticToggleErr call SyntasticHideErr()
-endfunction
-function! SyntasticHideErr()
-  execute ':SyntasticReset'
-  execute ':SyntasticCheck'
-  command! SyntasticToggleErr call SyntasticShowErr()
-endfunction
-command! SyntasticToggleErr call SyntasticShowErr()
-
-let g:syntastic_always_populate_loc_list = 1
-map <leader>f :SyntasticToggleErr<CR>
-map <leader>F :SyntasticToggleMode<CR>
-map <leader>N :lnext<CR>
-map <leader>P :lprev<CR>
-
-" map '\n'/'\p' to :cnext/:cprev
+" map '\n'/'\p' to :cnext/:cprev and '\c' to open quickfix list.
 map <leader>n :cnext<CR>
 map <leader>p :cprev<CR>
+map <leader>c :copen<CR>
+
+" map '\N'/'\P' to :lnext/:lprev and '\l' to open location list.
+map <leader>N :lnext<CR>
+map <leader>P :lprev<CR>
+map <leader>l :lopen<CR>
 
 " ctrl+p config
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -250,9 +236,13 @@ map <leader>S :SignifyRefresh<CR>
 " Grep binding (\g)
 map <leader>g :grep -r
 
-" Universal linking config and key binding
-let g:utl_cfg_hdl_scm_http = "silent !open '%u'"
-map <leader>l :Utl<CR>
-
 " OrgMode config
 let g:org_todo_keywords=['PENDING', 'TODO', 'DONE']
+
+" NeoVim-specific stuff
+if has('nvim')
+  set wildmenu
+  set wildmode=longest,list
+  tnoremap <Esc> <C-\><C-n>
+endif
+
