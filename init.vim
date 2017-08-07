@@ -53,12 +53,14 @@ Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'dag/vim-fish'
+Plugin 'rust-lang/rust.vim'
 Plugin 'w0rp/ale'
+Plugin 'chrisbra/vim-diff-enhanced'
 
-" Additional plugins for vim orgmode:
-Plugin 'jceb/vim-orgmode'
-Plugin 'tpope/vim-speeddating'
-Plugin 'vim-scripts/utl.vim'
+" Snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
 
 " Finalize Vundle init
 call vundle#end()
@@ -96,6 +98,8 @@ au!
 
 " For all text files set 'textwidth' to 72 characters.
 autocmd FileType text setlocal textwidth=72
+
+autocmd FileType markdown TW2
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -161,6 +165,7 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_set_loclist = 1
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = 'normal'
+let g:ale_linters = {'rust': ['cargo']}
 
 " folding
 set foldmethod=indent
@@ -236,8 +241,9 @@ map <leader>S :SignifyRefresh<CR>
 " Grep binding (\g)
 map <leader>g :grep -r
 
-" OrgMode config
-let g:org_todo_keywords=['PENDING', 'TODO', 'DONE']
+" Diff config
+map <leader>d :windo diffthis<CR>
+map <leader>D :windo diffoff<CR>
 
 " NeoVim-specific stuff
 if has('nvim')
@@ -245,4 +251,3 @@ if has('nvim')
   set wildmode=longest,list
   tnoremap <Esc> <C-\><C-n>
 endif
-
