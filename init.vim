@@ -12,8 +12,9 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set ignorecase          " ignore case when searching
 set hidden		" allow hidden unsaved buffers
+set colorcolumn=80      " show maximal line length aid
 
-" Don't use Ex mode, use Q for formatting
+" use Q for formatting
 map Q gq
 
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
@@ -56,6 +57,7 @@ Plugin 'dag/vim-fish'
 Plugin 'rust-lang/rust.vim'
 Plugin 'w0rp/ale'
 Plugin 'chrisbra/vim-diff-enhanced'
+Plugin 'jremmen/vim-ripgrep'
 
 " Snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -78,6 +80,7 @@ if &t_Co > 2 || has("gui_running")
   colorscheme jellybeans
 endif
 
+" Set font for gui vim.
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ Medium:h11
   set go-=l
@@ -92,14 +95,18 @@ endif
 " Also load indent files, to automatically do language-dependent indenting.
 filetype plugin indent on
 
-" Put these in an autocmd group, so that we can delete them easily.
+" commands for configuring indenting
+command! TW4 setlocal sw=4 sts=4 et
+command! TW2 setlocal sw=2 sts=2 et
+command! TT8 setlocal sw=8 sts=8 noet
+command! TT4 setlocal sw=4 sts=4 noet
+
+" Put autocmds in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
 au!
 
 " For all text files set 'textwidth' to 72 characters.
 autocmd FileType text setlocal textwidth=72
-
-autocmd FileType markdown TW2
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
@@ -110,6 +117,19 @@ autocmd BufReadPost *
 \ if line("'\"") > 1 && line("'\"") <= line("$") |
 \   exe "normal! g`\"" |
 \ endif
+
+" configure indent size based on language
+au FileType python TW4
+au FileType haskell TW4
+au FileType ruby TW4
+au FileType cpp TW2
+au FileType javascript TW2
+au FileType coffee TW2
+au FileType html TW2
+au FileType xml TW2
+au FileType rst TW2
+au FileType yaml TW2
+au FileType markdown TW2
 
 augroup END
 
@@ -124,39 +144,6 @@ endif
 " exclude the files that we never edit
 set wildignore+=*.pyc
 let g:netrw_list_hide='\.pyc$,\..*\.swp$,^\.hg'
-
-" 2-space indents for C++ (according to Google style guide)
-au FileType cpp setlocal sw=2 sts=2 et
-
-" 4-space indents for python and javascript
-au FileType python setlocal sw=4 sts=4 et
-au FileType haskell setlocal sw=4 sts=4 et
-au FileType ruby setlocal sw=4 sts=4 et
-au FileType javascript setlocal sw=4 sts=4 et
-au FileType coffee setlocal sw=2 sts=2 et
-
-" commands for configuring indenting
-command! TW4 setlocal sw=4 sts=4 et
-command! TW2 setlocal sw=2 sts=2 et
-command! TT8 setlocal sw=8 sts=8 noet
-command! TT4 setlocal sw=4 sts=4 noet
-
-" type :make and get a list of syntax errors
-au FileType python setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-au FileType python setlocal equalprg=reindent
-" au FileType python setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-au FileType python setlocal efm=\(\'%m\'\,\ \(\'%f\'\,\ %l\,\ %c\,\ \'%s\'\)\)
-
-" 2-space indents for html, xml, rst and yaml
-au FileType html setlocal sw=2 sts=2 et
-au FileType xml setlocal sw=2 sts=2 et
-au FileType rst setlocal sw=2 sts=2 et
-au FileType yaml setlocal sw=2 sts=2 et
-
-" zpt is html too
-au BufRead,BufNewFile *.zpt setfiletype html
-" pys is python too
-au BufRead,BufNewFile *.pys setfiletype python
 
 " ALE configuration
 let g:ale_sign_error = '!'
@@ -174,6 +161,9 @@ set foldlevel=1
 
 " use OS clipboard
 set clipboard=unnamed
+
+" Paste toggle
+set pastetoggle=<F2>
 
 map <leader>b :VCSBlame<CR>
 map <leader>d :VCSDiff<CR>
@@ -228,18 +218,17 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 map <leader>e :CtrlP
 set wildignore+=doc/*,node_modules/*,*.html
 
-" Number addition and subtraction (because <C-a> is used by screen)
+" Number addition and subtraction (because <C-a> is used by tmux)
 map <leader>a <C-a>
 " Since we defined \a for addition, \x for subtraction would be consistent
 map <leader>x <C-x>
 
-" Signify toggle
+" Signify configuration
 map <leader>s :SignifyToggle<CR>
-" Signify refresh
 map <leader>S :SignifyRefresh<CR>
 
-" Grep binding (\g)
-map <leader>g :grep -r
+" RipGrep key binding (\g)
+map <leader>g :Rg 
 
 " Diff config
 map <leader>d :windo diffthis<CR>
@@ -249,5 +238,10 @@ map <leader>D :windo diffoff<CR>
 if has('nvim')
   set wildmenu
   set wildmode=longest,list
+  " Exit from insert mode in the terminal window.
   tnoremap <Esc> <C-\><C-n>
+  " Send <Esc> to inside of the terminal (handy if you run another vim there).
+  tnoremap <leader><Esc> <Esc>
+  " Open shell
+  command! Bash e term://bash
 endif
