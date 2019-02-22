@@ -160,8 +160,12 @@ set foldmethod=indent
 set nofoldenable
 set foldlevel=1
 
-" use OS clipboard
-set clipboard=unnamed
+" Configure the clipboard depending on the OS
+if has('macunix')
+  set clipboard=unnamed   	" use primary OS clipboard
+else
+  set clipboard=unnamedplus	" use X Window CLIPBOARD clipboard
+endif
 
 " Paste toggle
 set pastetoggle=<F2>
