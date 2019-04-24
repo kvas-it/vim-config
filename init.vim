@@ -283,4 +283,8 @@ if has('nvim')
 
   " Import Clojure REPL integration
   source ~/.vim/repl.vim
+  " And map some keys
+  map <leader>X :ReplPaste<cr>
+  map <leader>x ya(:ReplPaste<cr>
+  map <leader>z :ReplToggle<cr>
 endif
