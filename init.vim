@@ -46,6 +46,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/vcscommand.vim'
 Plugin 'dag/vim2hs'
 Plugin 'flazz/vim-colorschemes'
@@ -64,6 +65,12 @@ Plugin 'jremmen/vim-ripgrep'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+
+" Clojure tools
+Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'jebberjeb/clojure-socketrepl.nvim'
+" Plugin 'tpope/vim-repeat'
+" Plugin 'guns/vim-sexp'
 
 " Finalize Vundle init
 call vundle#end()
@@ -132,7 +139,31 @@ au FileType rst TW2
 au FileType yaml TW2
 au FileType markdown TW2
 
+" Rainbow parens for Clojure
+au FileType clojure RainbowParenthesesToggle
+au FileType clojure RainbowParenthesesLoadRound
+
 augroup END
+
+" Rainbow parentheses config
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
@@ -249,4 +280,7 @@ if has('nvim')
   tnoremap <leader><Esc> <Esc>
   " Open shell
   command! Bash e term://bash
+
+  " Import Clojure REPL integration
+  source ~/.vim/repl.vim
 endif
