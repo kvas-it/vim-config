@@ -140,7 +140,7 @@ au FileType yaml TW2
 au FileType markdown TW2
 
 " Rainbow parens for Clojure
-au FileType clojure RainbowParenthesesToggle
+au FileType clojure RainbowParenthesesActivate
 au FileType clojure RainbowParenthesesLoadRound
 
 augroup END
@@ -235,9 +235,9 @@ command! XMLFormat % !xmllint --format -
 let g:run_cmd = 'vimrun'
 
 " run current file
-map <leader>R :wa<CR>:Run %:p<CR>
+map <leader>R :wa<CR>:Run %:p<CR>i
 " run last file
-map <leader>r :wa<CR>:Run<CR>
+map <leader>r :wa<CR>:Run<CR>i
 
 " map '\n'/'\p' to :cnext/:cprev and '\c' to open quickfix list.
 map <leader>n :cnext<CR>
