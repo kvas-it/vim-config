@@ -60,6 +60,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'w0rp/ale'
 Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'jremmen/vim-ripgrep'
+Plugin 'ervandew/supertab'
 
 " Snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
